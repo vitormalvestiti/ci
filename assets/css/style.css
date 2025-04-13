@@ -1,0 +1,42 @@
+body {
+    min-height: 100vh;
+    display: flex;
+  }
+  .content {
+    flex-grow: 1;
+    padding: 2rem;
+  }
+  .sidebar .nav-link {
+    color: #000;
+    margin-bottom: 0.5rem;
+  }
+  .sidebar .nav-link.active {
+    font-weight: bold;
+  }
+  .sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    position: fixed;
+    padding-top: 20px;
+    border-right: 1px solid #dee2e6;
+  }
+  
+  .sidebar .nav-link {
+    color: #000;
+    padding: 10px 20px;
+    border-left: 4px solid transparent;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .sidebar .nav-link:hover {
+    background-color: #e9ecef;
+  }
+  
+  .sidebar .nav-link.active {
+    border-left: 4px solid #0d6efd; /* azul do Bootstrap */
+    background-color: #e9f0ff;
+    font-weight: bold;
+    color: #0d6efd;
+  }
+  
