@@ -55,10 +55,34 @@
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
           </div>
           <div class="modal-body">
-            <?= $this->session->flashdata('success') ?>
+            <?= $success ?>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Fechar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <?php endif; ?>
+
+  <?php if (isset($conflict)): ?>
+    <div class="modal fade" id="conflictModal" tabindex="-1" aria-labelledby="conflictModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-danger">
+          <div class="modal-header bg-danger text-white">
+            <h5 class="modal-title" id="conflictModalLabel">
+              <i class="bi bi-exclamation-triangle me-2"></i>Conflito de datas
+            </h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Fechar"></button>
+          </div>
+          <div class="modal-body">
+            <?= $conflict ?>
+          </div>
+          <div class="modal-footer">
+            <a href="<?= site_url('person') ?>" class="btn btn-outline-danger">
+              Ir para funcionários
+            </a>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fechar</button>
           </div>
         </div>
       </div>
@@ -92,8 +116,11 @@
       });
 
       <?php if (isset($success)): ?>
-        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
-        successModal.show();
+        new bootstrap.Modal(document.getElementById('successModal')).show();
+      <?php endif; ?>
+
+      <?php if (isset($conflict)): ?>
+        new bootstrap.Modal(document.getElementById('conflictModal')).show();
       <?php endif; ?>
     });
   </script>

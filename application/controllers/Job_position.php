@@ -85,8 +85,32 @@ class Job_position extends CI_Controller
         $person_id = $this->input->post('person_id');
         $job_position_id = $this->input->post('job_position_id');
         $start_date = $this->input->post('start_date');
+        $today = date('Y-m-d');
 
         $this->load->model('Job_history_model');
+        $this->load->model('Job_position_model');
+        $this->load->model('Person_model');
+
+        $histories = $this->Job_history_model->get_by_person($person_id);
+
+        foreach ($histories as $history) {
+            $start = $history->start_date;
+            $end = $history->end_date ?? $today;
+
+            if ($start_date >= $start && $start_date <= $end && $start_date !== $today) {
+                $job_position = $this->Job_position_model->get_by_id($job_position_id);
+
+                $data['title'] = 'Vincular Cargo';
+                $data['view'] = 'job_position/assign';
+                $data['view_data'] = [
+                    'job_position' => $job_position,
+                    'conflict' => 'Já existe um cargo registrado neste intervalo de data.'
+                ];
+
+                $this->load->view('layout', $data);
+                return;
+            }
+        }
 
         $current = $this->Job_history_model->get_active_by_person($person_id);
         if ($current) {
@@ -99,13 +123,16 @@ class Job_position extends CI_Controller
             'start_date' => $start_date
         ]);
 
-        $this->load->model('Job_position_model');
         $job_position = $this->Job_position_model->get_by_id($job_position_id);
 
-        $data['job_position'] = $job_position;
-        $data['success'] = 'Funcionário vinculado ao cargo com sucesso!';
+        $data['title'] = 'Vincular Cargo';
+        $data['view'] = 'job_position/assign';
+        $data['view_data'] = [
+            'job_position' => $job_position,
+            'success' => 'Funcionário vinculado ao cargo com sucesso!'
+        ];
 
-        $this->load->view('job_position/assign', $data);
+        $this->load->view('layout', $data);
     }
 
     public function create()
