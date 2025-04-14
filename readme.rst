@@ -1,71 +1,52 @@
-###################
-What is CodeIgniter
-###################
+Sistema de Gestão de Cargos e Funcionários
+=================================================================
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+Este projeto é um sistema desenvolvido em PHP com CodeIgniter 3 e PostgreSQL, destinado à gestão de funcionários e seus cargos ao longo do tempo. Conta com funcionalidades completas de cadastro, histórico, edição e verificação de conflitos de datas.
 
-*******************
-Release Information
-*******************
+Funcionalidades
+---------------
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+- Cadastro de Funcionários e Cargos
+- Edição de dados de Funcionários e cargos
+- Atribuição de cargos com datas de início e fim
+- Controle de histórico de cargos
+- Desligamento de funcionários 
+- Verificação automática de conflitos de datas
+- Modal de sucesso e erro para ações importantes
+- Pesquisa de funcionários e cargos (inclusive com Select2)
+- Paginação de resultados
 
-**************************
-Changelog and New Features
-**************************
+Validações e Regras de Negócio
+------------------------------
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+- Um funcionário não pode ter dois cargos no mesmo intervalo de tempo (exceto o dia atual)
+- A data mínima para novo cargo após desligamento é o dia seguinte ao desligamento
+- Não é possível iniciar um cargo em uma data futura
+- O sistema valida conflitos de datas e oferece link direto para histórico quando necessário
+- Modal de confirmação antes da exclusão de qualquer registro
 
-*******************
-Server Requirements
-*******************
+Tecnologias Utilizadas
+-----------------------
 
-PHP version 5.6 or newer is recommended.
+- PHP 7.4
+- CodeIgniter 3
+- PostgreSQL
+- Bootstrap 5.3
+- Bootstrap Icons
+- Select2 (autocomplete AJAX)
+- jQuery
+- HTML5 e CSS3
+- Git
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+Organização de Código
+---------------------
 
-************
-Installation
-************
+- Arquitetura MVC com separação clara entre Controllers, Models e Views
+- CSS separado por página em: ``assets/css/pages/{controller}/{view}.css``
+- Reutilização de layout com view ``layout.php``
 
-Please see the `installation section <https://codeigniter.com/userguide3/installation/index.html>`_
-of the CodeIgniter User Guide.
+Tecnologias para usadas para execução Local
+--------------
 
-*******
-License
-*******
-
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
-
-*********
-Resources
-*********
-
--  `User Guide <https://codeigniter.com/docs>`_
--  `Contributing Guide <https://github.com/bcit-ci/CodeIgniter/blob/develop/contributing.md>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
-
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
-
-***************
-Acknowledgement
-***************
-
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+1. Laragon
+2. PGAdmin
