@@ -50,3 +50,4 @@ Tecnologias para usadas para execução Local
 
 1. Laragon
 2. PGAdmin
+3. URL para testes local: http://localhost/ci/index.php/
