@@ -59,11 +59,10 @@ class Job_history extends CI_Controller
         $data = [
             'job_position_id' => $this->input->post('job_position_id'),
             'start_date' => $this->input->post('start_date'),
-            'end_date' => $this->input->post('end_date')
+            'end_date' => $this->input->post('end_date') ?: null
         ];
 
         $this->Job_history_model->update($id, $data);
-        $this->load->view('layout', $data);
 
         $updated_history = $this->Job_history_model->get_by_id($id);
         $person = $this->Person_model->get_by_id($updated_history->person_id);
@@ -76,7 +75,13 @@ class Job_history extends CI_Controller
             'success' => 'Histórico atualizado com sucesso!'
         ];
 
-        $this->load->view('job_history/edit', $view_data);
+        $data = [
+            'title' => 'Editar Histórico',
+            'view' => 'job_history/edit',
+            'view_data' => $view_data
+        ];
+
+        $this->load->view('layout', $data);
     }
 
     public function delete($id)
